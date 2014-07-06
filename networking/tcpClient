@@ -1,7 +1,7 @@
 net = require 'net'
 
-domain = 'localhost'
-port = 9001
+domain = process.argv[2]
+port = process.argv[3]
 
 connection = net.createConnection port, domain
 
