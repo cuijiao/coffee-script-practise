@@ -3,9 +3,12 @@ domain = process.argv[2]
 port = process.argv[3]
 
 server = net.createServer (socket) ->
-	console.log "Received connection from #{socket.remoteAddress}"
-	socket.write "Hello,World!\n"
-	socket.end()
+    console.log "New connection from #{socket.remoteAddress}"
+
+    socket.on 'data', (data) ->
+        console.log "#{socket.remoteAddress} sent: #{data}"
+        others = server.connections - 1
+        socket.write "You have #{others} #{others == 1 and "peer" or "peers"} on this server"
 
 console.log "Listening to #{domain}:#{port}"
 server.listen port, domain

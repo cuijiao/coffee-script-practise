@@ -3,11 +3,21 @@ net = require 'net'
 domain = process.argv[2]
 port = process.argv[3]
 
+ping = (socket, delay) ->
+    console.log "Pinging server"
+    socket.write "Ping"
+    nextPing = -> ping(socket, delay)
+    setTimeout nextPing, delay
+
 connection = net.createConnection port, domain
 
 connection.on 'connect', () ->
     console.log "Opened connection to #{domain}:#{port}."
+    ping connection, 2000
 
 connection.on 'data', (data) ->
     console.log "Received: #{data}"
-    connection.end()
+
+connection.on 'end', (data) ->
+    console.log "Connection closed"
+    process.exit()
