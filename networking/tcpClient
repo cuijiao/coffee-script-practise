@@ -1,0 +1,13 @@
+net = require 'net'
+
+domain = 'localhost'
+port = 9001
+
+connection = net.createConnection port, domain
+
+connection.on 'connect', () ->
+    console.log "Opened connection to #{domain}:#{port}."
+
+connection.on 'data', (data) ->
+    console.log "Received: #{data}"
+    connection.end()

@@ -1,0 +1,11 @@
+net = require 'net'
+domain = 'localhost'
+port = 9001
+
+server = net.createServer (socket) ->
+	console.log "Received connection from #{socket.remoteAddress}"
+	socket.write "Hello,World!\n"
+	socket.end()
+
+console.log "Listening to #{domain}:#{port}"
+server.listen port, domain
