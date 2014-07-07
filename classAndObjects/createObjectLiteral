@@ -1,0 +1,6 @@
+You want to initialize an object literal, but you do not want to overwrite the object if it already exists.
+
+window.MY_NAMESPACE ?= {}  this is the equivalent of javaScript  window.MY_NAMESPACE = window.MY_NAMESPACE || {};
+
+
+
